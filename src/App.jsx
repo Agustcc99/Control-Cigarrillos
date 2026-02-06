@@ -17,15 +17,17 @@ function LoginSimple() {
   async function iniciarSesion(e) {
     e.preventDefault();
     setError("");
+
     const { error } = await supabase.auth.signInWithPassword({
       email: email.trim(),
       password,
     });
+
     if (error) setError(error.message);
   }
 
   return (
-    <div className="contenedor">
+    <div className="pantallaLogin">
       <section className="tarjeta">
         <h1 className="titulo">Control de cigarrillos/tabaco</h1>
         {error ? <section className="tarjeta error">{error}</section> : null}
@@ -33,12 +35,23 @@ function LoginSimple() {
         <form onSubmit={iniciarSesion} style={{ display: "grid", gap: 10 }}>
           <label className="etiqueta">
             Email
-            <input value={email} onChange={(e) => setEmail(e.target.value)} />
+            <input
+              type="email"
+              inputMode="email"
+              autoComplete="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </label>
 
           <label className="etiqueta">
             Contraseña
-            <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" />
+            <input
+              type="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </label>
 
           <button className="boton botonPrimario" type="submit">
@@ -55,7 +68,7 @@ export default function App() {
 
   if (cargandoSesion) {
     return (
-      <div className="contenedor">
+      <div className="pantallaCargando">
         <section className="tarjeta">Cargando...</section>
       </div>
     );
