@@ -1,38 +1,52 @@
 :root {
+  /* =========================
+     Deep Crimson & Charcoal
+     ========================= */
+
   /* Fondo */
-  --fondo: #070a14;
-  --fondo2: #0b1020;
+  --fondo: #0F1115;
+  --fondo2: #0B0D12;
 
   /* Texto */
-  --texto: rgba(255, 255, 255, 0.92);
-  --muted: rgba(255, 255, 255, 0.62);
+  --texto: #F3F4F6;
+  --muted: #9CA3AF;
 
-  /* Paleta */
-  --celeste: #38bdf8;      /* sky-400 */
-  --celeste2: #22d3ee;     /* cyan-400 */
-  --agua: #2dd4bf;         /* teal-400 */
-  --agua2: #5eead4;        /* teal-300 */
+  /* Acento (primario) */
+  --acento: #E11D48;
+  --acento-oscuro: #9F1239;
+  --acento-claro: #FB7185;
+  --focus: rgba(225, 29, 72, 0.35);
+
+  /* Alias (por compatibilidad con tu CSS anterior) */
+  --celeste: var(--acento);
+  --celeste2: var(--acento-oscuro);
+  --agua: var(--acento-claro);
+  --agua2: rgba(251, 113, 133, 0.55);
 
   /* Superficies */
-  --panel: rgba(255, 255, 255, 0.06);
-  --panel2: rgba(255, 255, 255, 0.09);
+  --panel: rgba(255, 255, 255, 0.03);
+  --panel2: rgba(255, 255, 255, 0.05);
+  --superficie: #181A1F;
+  --superficie2: #1F232B;
 
   /* Bordes */
-  --borde: rgba(255, 255, 255, 0.10);
-  --borde2: rgba(255, 255, 255, 0.16);
+  --borde: rgba(255, 255, 255, 0.07);
+  --borde2: rgba(255, 255, 255, 0.12);
 
-  /* Sombra */
-  --sombra: 0 14px 44px rgba(0, 0, 0, 0.40);
-  --sombra2: 0 8px 22px rgba(0, 0, 0, 0.32);
+  /* Sombras (más “SaaS”, menos “borde duro”) */
+  --sombra: 0 18px 54px rgba(0, 0, 0, 0.45);
+  --sombra2: 0 10px 28px rgba(0, 0, 0, 0.34);
 
   /* Radios */
   --radio: 18px;
   --radio2: 14px;
 
   /* Transiciones */
-  --t-rapida: 160ms ease;
-  --t-media: 280ms ease;
-  --t-lenta: 2000ms ease; /* 2 segundos */
+  --t-rapida: 140ms ease;
+  --t-media: 220ms ease;
+  --t-lenta: 360ms ease;
+
+  color-scheme: dark;
 
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
@@ -45,6 +59,10 @@ body,
   height: 100%;
 }
 
+html {
+  background-color: var(--fondo); /* iOS: evita “blancos” */
+}
+
 /* Fondo global para evitar "blancos" en iOS (rebote/scroll/paint) */
 body {
   margin: 0;
@@ -53,12 +71,12 @@ body {
   /* fallback sólido (clave en iOS) */
   background-color: var(--fondo);
 
-  /* ✅ Fondo ajustado: glow inferior más claro y elegante */
+  /* Glow MUY sutil + más neutro (sin tinte celeste) */
   background:
-    radial-gradient(1200px 700px at 12% -10%, rgba(56, 189, 248, 0.18), transparent 60%),
-    radial-gradient(1000px 650px at 90% 10%, rgba(45, 212, 191, 0.14), transparent 58%),
-    radial-gradient(120% 80% at 50% 110%, rgba(110, 210, 220, 0.25) 0%, rgba(110, 210, 220, 0) 60%),
-    linear-gradient(180deg, #0b1620 0%, #0a121a 60%, #081018 100%);
+    radial-gradient(900px 520px at 12% -12%, rgba(225, 29, 72, 0.14), transparent 60%),
+    radial-gradient(900px 520px at 88% 0%, rgba(225, 29, 72, 0.07), transparent 62%),
+    radial-gradient(120% 80% at 50% 110%, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0) 60%),
+    linear-gradient(180deg, #0F1115 0%, #0B0D12 70%, #090A0E 100%);
 
   min-height: 100vh;
   min-height: 100dvh;
@@ -113,15 +131,14 @@ a { color: inherit; }
   padding: 14px 14px;
   border-radius: calc(var(--radio) + 2px);
 
-  background: linear-gradient(
-    180deg,
-    rgba(255,255,255,0.08),
-    rgba(255,255,255,0.05)
-  );
+  /* Más neutro, menos “vidrio celeste” */
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03)),
+    rgba(24, 26, 31, 0.55);
+
   border: 1px solid var(--borde);
   box-shadow: var(--sombra2);
 
-  /* iOS paint fix + blur correcto */
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   transform: translateZ(0);
@@ -143,10 +160,10 @@ a { color: inherit; }
   width: 10px;
   height: 10px;
   border-radius: 999px;
-  background: linear-gradient(135deg, var(--celeste), var(--agua));
+  background: linear-gradient(135deg, var(--acento), var(--acento-oscuro));
   box-shadow:
-    0 0 0 3px rgba(56, 189, 248, 0.16),
-    0 0 18px rgba(45, 212, 191, 0.18);
+    0 0 0 3px rgba(225, 29, 72, 0.14),
+    0 0 18px rgba(225, 29, 72, 0.18);
 }
 
 .nav {
@@ -164,7 +181,6 @@ a { color: inherit; }
 
   background: rgba(255,255,255,0.03);
 
-  /* ✅ “premium tabs”: sensación de pill, más nítida */
   box-shadow:
     0 0 0 1px rgba(255,255,255,0.04) inset,
     0 10px 24px rgba(0,0,0,0.18);
@@ -180,30 +196,30 @@ a { color: inherit; }
 
 .link:hover {
   transform: translateY(-1px);
-  border-color: rgba(56, 189, 248, 0.28);
-  background: rgba(255,255,255,0.06);
+  border-color: rgba(225, 29, 72, 0.28);
+  background: rgba(255,255,255,0.05);
   color: var(--texto);
   box-shadow:
-    0 0 0 1px rgba(56, 189, 248, 0.10) inset,
+    0 0 0 1px rgba(225, 29, 72, 0.10) inset,
     0 14px 34px rgba(0,0,0,0.22);
   filter: saturate(1.05);
 }
 
-/* ✅ Activo: más contrastado y con “shine” arriba */
+/* Activo: acento rojo, pero sin robarle protagonismo al +1 */
 .link.activo {
   color: var(--texto);
-  border-color: rgba(56, 189, 248, 0.48);
+  border-color: rgba(225, 29, 72, 0.38);
 
   background:
-    linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.02)),
-    linear-gradient(135deg, rgba(56, 189, 248, 0.26), rgba(45, 212, 191, 0.14));
+    linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+    rgba(255,255,255,0.03);
 
   box-shadow:
-    0 0 0 1px rgba(56, 189, 248, 0.16) inset,
-    0 0 18px rgba(56, 189, 248, 0.12),
+    0 0 0 1px rgba(225, 29, 72, 0.10) inset,
+    0 0 16px rgba(225, 29, 72, 0.10),
     0 18px 44px rgba(0,0,0,0.22);
 
-  filter: saturate(1.1);
+  filter: saturate(1.05);
 }
 
 .principal {
@@ -214,11 +230,14 @@ a { color: inherit; }
 .tarjeta {
   border-radius: var(--radio);
   padding: 14px;
-  border: 1px solid var(--borde);
-  background: linear-gradient(180deg, var(--panel2), var(--panel));
-  box-shadow: var(--sombra);
 
-  /* iOS paint fix para tarjetas con efectos */
+  /* Menos “borde marcado”, más superficie + sombra */
+  border: 1px solid rgba(255,255,255,0.06);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)),
+    var(--superficie);
+
+  box-shadow: var(--sombra);
   transform: translateZ(0);
   will-change: transform;
 }
@@ -235,17 +254,17 @@ a { color: inherit; }
   letter-spacing: 0.2px;
 }
 
+/* Caja “clave” (ej total) ahora en crimson sutil */
 .textoClave {
   font-size: 16px;
   margin-bottom: 10px;
   padding: 10px 12px;
   border-radius: var(--radio2);
-  border: 1px solid rgba(56, 189, 248, 0.30);
-  background: linear-gradient(
-    135deg,
-    rgba(56, 189, 248, 0.16),
-    rgba(45, 212, 191, 0.10)
-  );
+  border: 1px solid rgba(225, 29, 72, 0.22);
+  background:
+    linear-gradient(135deg, rgba(225, 29, 72, 0.14), rgba(159, 18, 57, 0.08));
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.03) inset;
 }
 
 .muted {
@@ -288,9 +307,9 @@ a { color: inherit; }
 /* Inputs */
 input, select {
   width: 100%;
-  background: rgba(0,0,0,0.30);
+  background: rgba(255,255,255,0.03);
   color: var(--texto);
-  border: 1px solid var(--borde);
+  border: 1px solid rgba(255,255,255,0.07);
   border-radius: 14px;
   padding: 11px 12px;
   outline: none;
@@ -301,20 +320,20 @@ input, select {
     box-shadow var(--t-media);
 }
 
-input::placeholder { color: rgba(255,255,255,0.45); }
+input::placeholder { color: rgba(255,255,255,0.38); }
 
 input:focus, select:focus {
-  border-color: rgba(56, 189, 248, 0.60);
-  background: rgba(0,0,0,0.40);
+  border-color: rgba(225, 29, 72, 0.55);
+  background: rgba(255,255,255,0.04);
   box-shadow:
-    0 0 0 3px rgba(56, 189, 248, 0.14),
-    0 0 18px rgba(45, 212, 191, 0.10);
+    0 0 0 4px var(--focus),
+    0 0 20px rgba(225, 29, 72, 0.10);
 }
 
 /* Botones base */
 .boton, .botonGrande {
-  border: 1px solid var(--borde);
-  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.04);
   color: var(--texto);
   border-radius: 14px;
   padding: 10px 12px;
@@ -330,9 +349,9 @@ input:focus, select:focus {
 
 .boton:hover, .botonGrande:hover {
   transform: translateY(-1px);
-  border-color: var(--borde2);
-  background: rgba(255,255,255,0.09);
-  box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+  border-color: rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.22);
 }
 
 .boton:active, .botonGrande:active {
@@ -340,31 +359,32 @@ input:focus, select:focus {
   filter: brightness(0.98);
 }
 
-/* Botón primario: +1 */
+/* Botón primario: +1 (protagonista real) */
 .botonPrimario {
-  border-color: rgba(56, 189, 248, 0.55);
-  background: linear-gradient(
-    135deg,
-    rgba(56, 189, 248, 0.28),
-    rgba(45, 212, 191, 0.18)
-  );
+  border-color: rgba(225, 29, 72, 0.35);
+  background: linear-gradient(135deg, var(--acento), var(--acento-oscuro));
   box-shadow:
-    0 0 0 1px rgba(56, 189, 248, 0.10) inset,
-    0 18px 42px rgba(34, 211, 238, 0.12);
+    0 10px 30px rgba(225, 29, 72, 0.18),
+    0 0 0 1px rgba(225, 29, 72, 0.22),
+    0 0 0 1px rgba(255,255,255,0.05) inset;
 }
 
 .botonPrimario:hover {
-  border-color: rgba(45, 212, 191, 0.60);
-  background: linear-gradient(
-    135deg,
-    rgba(56, 189, 248, 0.42),
-    rgba(45, 212, 191, 0.26)
-  );
+  border-color: rgba(225, 29, 72, 0.48);
   box-shadow:
-    0 0 0 1px rgba(45, 212, 191, 0.16) inset,
-    0 0 26px rgba(56, 189, 248, 0.18),
-    0 18px 50px rgba(34, 211, 238, 0.14);
-  filter: saturate(1.1);
+    0 12px 36px rgba(225, 29, 72, 0.22),
+    0 0 0 1px rgba(225, 29, 72, 0.28),
+    0 0 22px rgba(225, 29, 72, 0.14),
+    0 0 0 1px rgba(255,255,255,0.06) inset;
+  filter: saturate(1.05);
+}
+
+.botonPrimario:focus {
+  outline: none;
+  box-shadow:
+    0 12px 36px rgba(225, 29, 72, 0.22),
+    0 0 0 4px var(--focus),
+    0 0 0 1px rgba(225, 29, 72, 0.28);
 }
 
 .botonGrande {
@@ -372,6 +392,7 @@ input:focus, select:focus {
   padding: 16px 12px;
   font-size: 18px;
   margin-top: 10px;
+  min-height: 54px; /* sensación mobile “app” */
 }
 
 .boton:disabled, .botonGrande:disabled {
@@ -389,7 +410,7 @@ input:focus, select:focus {
   gap: 10px;
 }
 
-/* Item de evento: hover celeste difuso en 2s */
+/* Items: menos bordes, más superficie; hover suave + acento sutil */
 .itemLista {
   display: grid;
   grid-template-columns: 74px 110px 1fr;
@@ -397,33 +418,36 @@ input:focus, select:focus {
   padding: 12px;
   border-radius: var(--radio2);
 
-  background: rgba(0,0,0,0.30);
-  border: 1px solid var(--borde);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
 
-  box-shadow: 0 0 0 rgba(0,0,0,0);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.18);
 
   transition:
-    background var(--t-lenta),
-    border-color var(--t-lenta),
-    box-shadow var(--t-lenta),
+    background var(--t-media),
+    border-color var(--t-media),
+    box-shadow var(--t-media),
     transform var(--t-media);
 }
 
 .itemLista:hover {
   transform: translateY(-1px);
 
-  background: linear-gradient(
-    135deg,
-    rgba(56, 189, 248, 0.10),
-    rgba(45, 212, 191, 0.06)
-  );
-
-  border-color: rgba(56, 189, 248, 0.28);
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(225, 29, 72, 0.22);
 
   box-shadow:
-    0 0 0 1px rgba(56, 189, 248, 0.10) inset,
-    0 0 34px rgba(56, 189, 248, 0.14),
-    0 18px 50px rgba(0, 0, 0, 0.22);
+    0 12px 34px rgba(0,0,0,0.24),
+    inset 3px 0 0 rgba(225, 29, 72, 0.45);
+}
+
+/* (Opcional) Si querés marcar un item como “seleccionado” sin hover */
+.itemLista.activo {
+  background: rgba(225, 29, 72, 0.10);
+  border-color: rgba(225, 29, 72, 0.26);
+  box-shadow:
+    0 12px 34px rgba(0,0,0,0.24),
+    inset 3px 0 0 rgba(225, 29, 72, 0.55);
 }
 
 .hora { color: rgba(255,255,255,0.70); font-variant-numeric: tabular-nums; }
@@ -436,21 +460,28 @@ input:focus, select:focus {
   gap: 10px;
   padding: 12px;
   border-radius: var(--radio2);
-  background: rgba(0,0,0,0.30);
-  border: 1px solid var(--borde);
+
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.16);
 }
 
 .separador {
   height: 1px;
-  background: rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.08);
   margin: 12px 0;
+}
+
+/* (Opcional) Clase para pintar el número total “8” como protagonista */
+.numeroTotal {
+  color: var(--acento-claro);
+  font-weight: 800;
 }
 
 /* Mobile */
 @media (max-width: 560px) {
   .contenedor { padding: 12px; }
 
-  /* ✅ Header: marca arriba + nav 2x2 siempre */
   .encabezado {
     padding: 12px;
     flex-direction: column;
