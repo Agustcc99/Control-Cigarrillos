@@ -7,7 +7,7 @@
   --texto: rgba(255, 255, 255, 0.92);
   --muted: rgba(255, 255, 255, 0.62);
 
-  /* Paleta llamativa (celeste + verde agua) */
+  /* Paleta */
   --celeste: #38bdf8;      /* sky-400 */
   --celeste2: #22d3ee;     /* cyan-400 */
   --agua: #2dd4bf;         /* teal-400 */
@@ -53,11 +53,12 @@ body {
   /* fallback sólido (clave en iOS) */
   background-color: var(--fondo);
 
+  /* ✅ Fondo ajustado: glow inferior más claro y elegante */
   background:
-    radial-gradient(1200px 700px at 12% -10%, rgba(56, 189, 248, 0.22), transparent 60%),
-    radial-gradient(1000px 650px at 90% 10%, rgba(45, 212, 191, 0.18), transparent 58%),
-    radial-gradient(800px 550px at 65% 110%, rgba(34, 211, 238, 0.10), transparent 60%),
-    linear-gradient(180deg, var(--fondo), var(--fondo2));
+    radial-gradient(1200px 700px at 12% -10%, rgba(56, 189, 248, 0.18), transparent 60%),
+    radial-gradient(1000px 650px at 90% 10%, rgba(45, 212, 191, 0.14), transparent 58%),
+    radial-gradient(120% 80% at 50% 110%, rgba(110, 210, 220, 0.25) 0%, rgba(110, 210, 220, 0) 60%),
+    linear-gradient(180deg, #0b1620 0%, #0a121a 60%, #081018 100%);
 
   min-height: 100vh;
   min-height: 100dvh;
@@ -162,12 +163,19 @@ a { color: inherit; }
   color: var(--muted);
 
   background: rgba(255,255,255,0.03);
+
+  /* ✅ “premium tabs”: sensación de pill, más nítida */
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.04) inset,
+    0 10px 24px rgba(0,0,0,0.18);
+
   transition:
     transform var(--t-rapida),
     background var(--t-rapida),
     border-color var(--t-rapida),
     color var(--t-rapida),
-    box-shadow var(--t-rapida);
+    box-shadow var(--t-rapida),
+    filter var(--t-rapida);
 }
 
 .link:hover {
@@ -175,20 +183,27 @@ a { color: inherit; }
   border-color: rgba(56, 189, 248, 0.28);
   background: rgba(255,255,255,0.06);
   color: var(--texto);
-  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.10) inset;
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.10) inset,
+    0 14px 34px rgba(0,0,0,0.22);
+  filter: saturate(1.05);
 }
 
+/* ✅ Activo: más contrastado y con “shine” arriba */
 .link.activo {
   color: var(--texto);
-  border-color: rgba(56, 189, 248, 0.40);
-  background: linear-gradient(
-    135deg,
-    rgba(56, 189, 248, 0.22),
-    rgba(45, 212, 191, 0.12)
-  );
+  border-color: rgba(56, 189, 248, 0.48);
+
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.02)),
+    linear-gradient(135deg, rgba(56, 189, 248, 0.26), rgba(45, 212, 191, 0.14));
+
   box-shadow:
-    0 0 0 1px rgba(56, 189, 248, 0.14) inset,
-    0 10px 28px rgba(34, 211, 238, 0.10);
+    0 0 0 1px rgba(56, 189, 248, 0.16) inset,
+    0 0 18px rgba(56, 189, 248, 0.12),
+    0 18px 44px rgba(0,0,0,0.22);
+
+  filter: saturate(1.1);
 }
 
 .principal {
@@ -434,7 +449,30 @@ input:focus, select:focus {
 /* Mobile */
 @media (max-width: 560px) {
   .contenedor { padding: 12px; }
-  .encabezado { padding: 12px; }
+
+  /* ✅ Header: marca arriba + nav 2x2 siempre */
+  .encabezado {
+    padding: 12px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .marca {
+    justify-content: center;
+  }
+
+  .nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .link {
+    width: 100%;
+    text-align: center;
+    padding: 10px 12px;
+  }
 
   .itemLista {
     grid-template-columns: 74px 1fr;
